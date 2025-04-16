@@ -1,18 +1,18 @@
-importstreamlitasst
-importpandasaspd
-importjoblib
-importpickle
-LoadthetrainedLinearRegressionmodel
+import streamlit as st
+import pandas as pd
+import joblib
+import pickle
+#Load the trained LinearRegressionmodel
 model=joblib.load("crop_prediction_model.pkl")
 
-Streamlitapp
-st.title("CropPredictor")
+#Streamlitapp
+st.title("Crop Predictor")
 
-Addanimagetothepage
-st.image("C:/Users/dinalik/Desktop/pythoncourse/istockphoto-1127372646-612x612.jpg")
+#Add an image to the page
+#st.image("C:/Users/dinalik/Desktop/pythoncourse/istockphoto-1127372646-612x612.jpg")
 
-Sidebarwithinputfieldsforcropproperties
-st.sidebar.header("EntercropProperties")
+#Sidebarwithinputfieldsforcropproperties
+st.sidebar.header("Enter crop Properties")
 Nitrogen=st.sidebar.slider("Nitrogen",0.0,160.0,8.0)
 Pottasium=st.sidebar.slider("Pottasium",5.0,205.0,0.5)
 Phosphorus=st.sidebar.slider("Phosphorus",5.0,145.0,0.5)
@@ -25,12 +25,13 @@ df=pd.read_csv('Crop_recommendation.csv')
 c=df.label.astype('category')
 targets=dict(enumerate(c.cat.categories))
 crop_labels=list(targets.values())
-crop_labels=[label.capitalize()forlabelincrop_labels]
-PredictCrop
+crop_labels=[label.capitalize() for label in crop_labels]
+#Predict Crop
 crop_properties=[[Nitrogen,Pottasium,Phosphorus,Temperature,
 Humidity,pH,Rainfall]]
 predicted_label=model.predict(crop_properties)[0]
-predicted_crop_name=crop_labels[predicted_label]Assumingthelabelisanindex
+predicted_crop_name=crop_labels[predicted_label]
+#Assuming the label is an index
 
 image_paths={
 0:'apple.jfif',
@@ -58,7 +59,7 @@ image_paths={
 }
 
 image_path=image_paths.get(predicted_label,None)
-Displaypredictedcategory
+#Display predicted category
 st.image(image_path,caption=f"Crop:{predicted_label}")
-st.title(f"Predictedcroplabel:")
+st.title(f"Predicted crop label:")
 st.title(predicted_crop_name)
