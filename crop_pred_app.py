@@ -21,7 +21,7 @@ Humidity = st.sidebar.slider("Humidity", 14.0, 100.0, 0.08)
 pH = st.sidebar.slider("pH", 3.0, 10.0, 30.0)
 Rainfall = st.sidebar.slider("Rainfall", 20.0, 300.0, 100.0)
 
-df= pd.read_csv('C:/Users/dinalik/Desktop/python course/CROP_PREDICTOR/Crop_recommendation.csv')
+df= pd.read_csv('Crop_recommendation.csv')
 c=df.label.astype('category')
 targets = dict(enumerate(c.cat.categories))
 crop_labels=list(targets.values())
